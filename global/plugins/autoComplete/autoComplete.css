@@ -1,0 +1,62 @@
+@charset "utf-8";
+.div-auto {
+    border: 1px solid #817F82;
+    position: absolute;
+    z-index: 100000;
+    width: 300px;
+    top: 18px;
+    background: #fff;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 220px;
+    text-align: left;
+    padding-left: 3px;
+}
+
+.item-div {
+    cursor: pointer;
+    line-height: 20px;
+}
+
+.show-all-div {
+    cursor: pointer;
+    line-height: 30px;
+    position: absolute;
+    bottom: 0;
+}
+
+.auto-tip-div {
+    z-index: 9999999;
+    position: absolute;
+    display: none;
+    background: white
+}
+
+.auto-text-btn {
+    margin-right: 8px;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 22px;
+    text-align: center;
+    cursor: pointer;
+    color: #36c;
+    text-decoration: none;
+    width: 60px;
+    height: 25px;
+    background: url(image/dotogether.png) no-repeat;
+}
+
+.auo-text-loading,.auo-text-warn{
+    width:16px;
+    height:16px;
+    display: block;
+    padding-left: 18px;
+}
+
+.auo-text-loading{
+    background: url(image/ajaxloader.gif) no-repeat;
+}
+
+.auo-text-warn{
+    background: url(image/iconwarning.gif) no-repeat;
+}
