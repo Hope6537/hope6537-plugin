@@ -6,19 +6,12 @@
 .project
 .settings/
 
-
 # Intellij project files
 *.iml
 *.patch
 .idea/
-bison-webapp/
 
 # Others
 META-INF/
 target/
 logs/
-
-cloud-webapp/src/main/webapp/static/admin/img/upload
-cloud-webapp/src/main/webapp/static/front/img/upload
-cloud-webapp/src/main/webapp/static/common/img/upload
-cloud-webapp/src/main/webapp/static/common/bower_plugins/
