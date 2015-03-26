@@ -1,0 +1,13 @@
+{
+  "name": "hope6537-plugin",
+  "homepage": "https://github.com/Hope6537/hope6537-plugin",
+  "_release": "0.2",
+  "_resolution": {
+    "type": "tag",
+    "tag": "0.2",
+    "commit": "a95136e74e71e494acb6cf6f3a037873cf56792a"
+  },
+  "_source": "git://github.com/Hope6537/hope6537-plugin.git",
+  "_target": "0.2",
+  "_originalSource": "hope6537-plugin"
+}

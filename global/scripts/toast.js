@@ -1,5 +1,5 @@
-var toast = function(){
-    var options={
+var toast = function () {
+    var options = {
         "closeButton": false,
         "debug": false,
         "positionClass": "toast-top-right",
@@ -14,22 +14,22 @@ var toast = function(){
         "hideMethod": "fadeOut"
     };
     return {
-        success:function(msg){
-            msg =  msg || "操作成功！";
-            toastr.options=options;
+        success: function (msg) {
+            msg = msg || "操作成功！";
+            toastr.options = options;
             toastr["success"](msg)
         },
-        info:function(msg){
-            toastr.options=options;
+        info: function (msg) {
+            toastr.options = options;
             toastr["info"](msg)
         },
-        warning:function(msg){
-            toastr.options=options;
+        warning: function (msg) {
+            toastr.options = options;
             toastr["warning"](msg)
         },
-        error:function(msg){
-            msg =  msg || "操作失败！";
-            toastr.options=options;
+        error: function (msg) {
+            msg = msg || "操作失败！";
+            toastr.options = options;
             toastr["error"](msg)
         }
     }

@@ -1,4 +1,4 @@
-var Datatable = function() {
+var Datatable = function () {
 
     var tableOptions; // main options
     var dataTable; // datatable object
@@ -8,7 +8,7 @@ var Datatable = function() {
     var tableInitialized = false;
     var the;
 
-    var countSelectedRecords = function() {
+    var countSelectedRecords = function () {
         var selected = $('tbody > tr > td:nth-child(1) input[type="checkbox"]:checked', table).size();
         var text = tableOptions.dataTable.language.metronicGroupActions;
         if (selected > 0) {
@@ -25,7 +25,7 @@ var Datatable = function() {
     return {
 
         //main function to initiate the module
-        init: function(options) {
+        init: function (options) {
 
             if (!$().dataTable) {
                 return;
@@ -38,14 +38,15 @@ var Datatable = function() {
                 filterApplyAction: "filter",
                 filterCancelAction: "filter_cancel",
                 loadingMessage: '载入中...',
-                onQuery : function(data){},
-                onSortColumn : function(sortColumn, sortDirection) {
+                onQuery: function (data) {
+                },
+                onSortColumn: function (sortColumn, sortDirection) {
                     return customGlobal.onSortColumnDefault(sortColumn, sortDirection);
                 },
                 dataTable: {
                     "dom": "<'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'<'table-group-actions pull-right'>>r><'table-scrollable't><'row'<'col-md-8 col-sm-12'pli><'col-md-4 col-sm-12'>>", // datatable layout
-                    "lengthMenu": [ 5,10, 25, 50, 75, 100 ],
-                    search:true,
+                    "lengthMenu": [5, 10, 25, 50, 75, 100],
+                    search: true,
                     "pageLength": 10, // default records per page
                     "language": { // language settings
                         // metronic spesific
@@ -83,22 +84,22 @@ var Datatable = function() {
                         "url": "", // ajax URL
                         "type": "POST", // request type
                         "timeout": 20000,
-                        "data": function(data) { // add request parameters before submit
-                            if(options.onQuery){
+                        "data": function (data) { // add request parameters before submit
+                            if (options.onQuery) {
                                 options.onQuery(data);
                             }
-                            if(options.onSortColumn){
+                            if (options.onSortColumn) {
                                 if (data.order[0]) {
                                     var sortTemp = options.onSortColumn(options.dataTable.columns[data.order[0].column].data, data.order[0].dir);
                                     data.sortField = sortTemp.sortColumn;
                                     data.sortOrder = sortTemp.sortDirection;
-                                }else{
+                                } else {
                                     data.sortField = "";
                                     data.sortOrder = "";
                                 }
                             }
-                            data.pageNo=parseInt(data.start/data.length,10)+1;
-                            data.pageSize=data.length;
+                            data.pageNo = parseInt(data.start / data.length, 10) + 1;
+                            data.pageSize = data.length;
                             Metronic.blockUI({
                                 message: tableOptions.loadingMessage,
                                 target: tableContainer,
@@ -107,7 +108,7 @@ var Datatable = function() {
                                 boxed: true
                             });
                         },
-                        "dataSrc": function(res) { // Manipulate the data returned from the server
+                        "dataSrc": function (res) { // Manipulate the data returned from the server
                             if ($('.group-checkable', table).size() === 1) {
                                 $('.group-checkable', table).attr("checked", false);
                                 $.uniform.update($('.group-checkable', table));
@@ -121,7 +122,7 @@ var Datatable = function() {
 
                             return res.data;
                         },
-                        "error": function() { // handle general connection errors
+                        "error": function () { // handle general connection errors
                             if (tableOptions.onError) {
                                 tableOptions.onError.call(undefined, the);
                             }
@@ -138,7 +139,7 @@ var Datatable = function() {
                         }
                     },
 
-                    "drawCallback": function(oSettings) { // run some code on table redraw
+                    "drawCallback": function (oSettings) { // run some code on table redraw
                         if (tableInitialized === false) { // check if table has been initialized
                             tableInitialized = true; // set table initialized
                             table.show(); // display table
@@ -179,10 +180,10 @@ var Datatable = function() {
                 $('.table-actions-wrapper', tableContainer).remove(); // remove the template container
             }
             // handle group checkboxes check/uncheck
-            $('.group-checkable', table).change(function() {
+            $('.group-checkable', table).change(function () {
                 var set = $('tbody > tr > td:nth-child(1) input[type="checkbox"]', table);
                 var checked = $(this).is(":checked");
-                $(set).each(function() {
+                $(set).each(function () {
                     $(this).attr("checked", checked);
                 });
                 $.uniform.update(set);
@@ -190,23 +191,23 @@ var Datatable = function() {
             });
 
             // handle row's checkbox click
-            table.on('change', 'tbody > tr > td:nth-child(1) input[type="checkbox"]', function() {
+            table.on('change', 'tbody > tr > td:nth-child(1) input[type="checkbox"]', function () {
                 countSelectedRecords();
             });
 
             // handle filter submit button click
-            table.on('click', '.filter-submit', function(e) {
+            table.on('click', '.filter-submit', function (e) {
                 e.preventDefault();
                 dataTable.ajax.reload();
             });
 
             // handle filter cancel button click
-            table.on('click', '.filter-cancel', function(e) {
+            table.on('click', '.filter-cancel', function (e) {
                 e.preventDefault();
-                $('textarea.form-filter, select.form-filter, input.form-filter', table).each(function() {
+                $('textarea.form-filter, select.form-filter, input.form-filter', table).each(function () {
                     $(this).val("");
                 });
-                $('input.form-filter[type="checkbox"]', table).each(function() {
+                $('input.form-filter[type="checkbox"]', table).each(function () {
                     $(this).attr("checked", false);
                 });
                 dataTable.ajax.reload();
@@ -214,42 +215,42 @@ var Datatable = function() {
 
             var tableId = tableOptions.src.attr("id");
             //显示列选择按钮事件
-            $('#'+tableId+'ToggleColumn').find('input[type="checkbox"]').on("change",function () {
+            $('#' + tableId + 'ToggleColumn').find('input[type="checkbox"]').on("change", function () {
                 var iCol = parseInt($(this).attr("data-column"));
                 dataTable.column(iCol).visible(!dataTable.column(iCol).visible());
             });
 
-            $("#"+tableId+"Reload").on("click",function(){
+            $("#" + tableId + "Reload").on("click", function () {
                 reloadTable(false);
             })
         },
 
-        getSelectedRowsCount: function() {
+        getSelectedRowsCount: function () {
             return $('tbody > tr > td:nth-child(1) input[type="checkbox"]:checked', table).size();
         },
 
-        getSelectedRows: function() {
+        getSelectedRows: function () {
             var rows = [];
-            $('tbody > tr > td:nth-child(1) input[type="checkbox"]:checked', table).each(function() {
+            $('tbody > tr > td:nth-child(1) input[type="checkbox"]:checked', table).each(function () {
                 rows.push($(this).val());
             });
 
             return rows;
         },
 
-        getDataTable: function() {
+        getDataTable: function () {
             return dataTable;
         },
 
-        getTableWrapper: function() {
+        getTableWrapper: function () {
             return tableWrapper;
         },
 
-        gettableContainer: function() {
+        gettableContainer: function () {
             return tableContainer;
         },
 
-        getTable: function() {
+        getTable: function () {
             return table;
         },
 
